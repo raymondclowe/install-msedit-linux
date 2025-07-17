@@ -42,12 +42,16 @@ echo "$RELEASE_JSON" | awk -v arch="$ARCH_KEY" '
   BEGIN { in_assets=0; name=""; url=""; found=0; }
   /"assets": \[/ { in_assets=1; next }
   in_assets && /"name":/ {
-    match($0, /"name": "([^"]+)"/, arr);
-    name=arr[1];
+    # Extract name using gsub - more portable than match with array
+    name = $0;
+    gsub(/.*"name": "/, "", name);
+    gsub(/".*/, "", name);
   }
   in_assets && /"browser_download_url":/ {
-    match($0, /"browser_download_url": "([^"]+)"/, arr);
-    url=arr[1];
+    # Extract URL using gsub - more portable than match with array
+    url = $0;
+    gsub(/.*"browser_download_url": "/, "", url);
+    gsub(/".*/, "", url);
     if (name ~ arch && name ~ /linux/ && name ~ /(xz|gz|tar.gz|AppImage|zip|bz2|tar|tar.zst)$/) {
       print url;
       found=1;
