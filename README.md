@@ -87,7 +87,7 @@ Alternatively, use `curl` in the terminal to download directly:
 curl -L --no-progress-meter --output edit.tar.zst https://github.com/microsoft/edit/releases/latest/download/edit-1.2.0-x86_64-linux-gnu.tar.zst
 ```
 
-> **Note:** Replace `x86_64` with `aarch64` for ARM64 systems.
+> **Note:** Replace `x86_64` with `aarch64` for ARM64 systems. The version number in the filename (e.g., `1.2.0`) may change with new releases. Check the [releases page](https://github.com/microsoft/edit/releases/latest) for the current filename.
 
 #### 3. Extract the archive
 
@@ -117,6 +117,14 @@ Make sure `~/.local/bin` is in your PATH by adding this to your `~/.profile` or 
 
 ```sh
 export PATH="$HOME/.local/bin:$PATH"
+```
+
+Then reload your shell configuration for the PATH change to take effect:
+
+```sh
+source ~/.profile
+# or, if you added it to .bashrc:
+source ~/.bashrc
 ```
 
 #### 5. Launch the editor
